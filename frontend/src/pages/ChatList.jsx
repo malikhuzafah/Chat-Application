@@ -1,0 +1,92 @@
+import React, { useEffect, useState } from "react";
+import { Typography, List, ListItem, ListItemText } from "@mui/material";
+import axios from "axios";
+import CreateChat from "../components/CreateChat";
+import SingleChat from "../components/SingleChat";
+
+function ChatList({ setChatId }) {
+  const [chats, setChats] = useState([]);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    // Simulated data for the chats
+    // const chatsData = [
+    //   { id: 1, title: "Chat 1", date: "2023-06-10" },
+    //   { id: 2, title: "Chat 2", date: "2023-06-09" },
+    //   { id: 3, title: "Chat 3", date: "2023-06-08" },
+    //   { id: 4, title: "Chat 4", date: "2023-06-07" },
+    // ];
+    console.log(localStorage.getItem("token"));
+    axios
+      .get("http://localhost:3000/api/users/me", {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        axios
+          .get("http://localhost:3000/api/chats", {
+            headers: {
+              "x-auth-token": localStorage.getItem("token"),
+            },
+          })
+          .then(async (response) => {
+            const chatsData = [];
+            for (let i = 0; i < response.data.length; i++) {
+              const chat = response.data[i];
+              const senderId =
+                chat.user1 === res.data._id ? chat.user2 : chat.user1;
+              console.log(senderId);
+              const title = (
+                await axios.get(`http://localhost:3000/api/users/${senderId}`)
+              ).data.name;
+              console.log(title);
+              const lastMessage = "hello";
+              // chat.messages.length > 0
+              //   ? chat.messages[chat.messages.length - 1].text
+              //   : "";
+              chatsData.push({ id: chat._id, title, lastMessage });
+            }
+            setChats(chatsData);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <div
+      style={{
+        borderRadius: 25,
+        height: "80vh",
+        overflow: "auto",
+      }}
+    >
+      <div
+        style={{
+          padding: 10,
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 20,
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          Chat List
+        </Typography>
+        <CreateChat />
+      </div>
+      <List>
+        {chats.length > 0 ? (
+          chats.map((chat) => <SingleChat chat={chat} setChatId={setChatId} />)
+        ) : (
+          <ListItem>
+            <ListItemText primary="No chats found" />
+          </ListItem>
+        )}
+      </List>
+    </div>
+  );
+}
+
+export default ChatList;
