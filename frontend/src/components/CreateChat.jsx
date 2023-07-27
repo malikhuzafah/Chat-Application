@@ -41,7 +41,11 @@ export default function CreateChat() {
       }
     }
     axios
-      .get("http://localhost:3000/api/users")
+      .get("http://localhost:3000/api/users", {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         setResults(res.data);
       })

@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate, Link } from "react-router-dom";
 import Menus from "./Menus";
+import axios from "axios";
 
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -98,25 +99,6 @@ const MenuBar = () => {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Doctor's Appointment</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <Link to="/pharmacy">Pharmacy</Link>
-                </Typography>
-              </MenuItem>
-              {isLoggedIn() && (
-                <>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <Link to="/orders">Orders</Link>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <Link to="/cart">Cart</Link>
-                    </Typography>
-                  </MenuItem>
-                </>
-              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -147,34 +129,6 @@ const MenuBar = () => {
             >
               Doctor'sAppointment
             </Button>
-            <Link to="/pharmacy" style={{ textDecoration: "none" }}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                Pharmacy
-              </Button>
-            </Link>
-            {isLoggedIn() && (
-              <>
-                <Link to="/orders" style={{ textDecoration: "none" }}>
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    Orders
-                  </Button>
-                </Link>
-                <Link to="/cart" style={{ textDecoration: "none" }}>
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    Cart
-                  </Button>
-                </Link>
-              </>
-            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

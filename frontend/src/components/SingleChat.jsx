@@ -1,11 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
-export default function SingleChat({ chat, setChatId }) {
+export default function SingleChat({
+  chat,
+  setChatId,
+  setKey,
+  user,
+  setSender,
+}) {
+  const [send, setSend] = useState({});
+
+  const senderName = async () => {
+    var tempChat = await axios.get(
+      `http://localhost:3000/api/chats/${chat.id}`,
+      {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    var sender;
+    if (tempChat.data.user1 === user._id) {
+      sender = await axios.get(
+        `http://localhost:3000/api/users/${tempChat.data.user2}`
+      );
+    } else {
+      sender = await axios.get(
+        `http://localhost:3000/api/users/${tempChat.data.user1}`
+      );
+    }
+    setSend(sender.data.name);
+  };
+
+  useEffect(() => {
+    senderName();
+  }, []);
+
+  const getData = async () => {
+    var tempChat = await axios.get(
+      `http://localhost:3000/api/chats/${chat.id}`,
+      {
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    var sender;
+    if (tempChat.data.user1 === user._id) {
+      sender = await axios.get(
+        `http://localhost:3000/api/users/${tempChat.data.user2}`
+      );
+    } else {
+      sender = await axios.get(
+        `http://localhost:3000/api/users/${tempChat.data.user1}`
+      );
+    }
+    setSender(sender.data);
+  };
+
   return (
     <>
       {/* <ListItem
@@ -32,12 +89,14 @@ export default function SingleChat({ chat, setChatId }) {
           // marginBottom: 2,
         }}
         onClick={() => {
+          setKey(Math.random());
           setChatId(chat.id);
-          console.log(chat.id);
+          getData();
         }}
       >
         <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" /> */}
+          <Avatar>{send[0]}</Avatar>
         </ListItemAvatar>
         <ListItemText
           primary={chat.title}

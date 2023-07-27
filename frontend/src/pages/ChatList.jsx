@@ -4,7 +4,7 @@ import axios from "axios";
 import CreateChat from "../components/CreateChat";
 import SingleChat from "../components/SingleChat";
 
-function ChatList({ setChatId }) {
+function ChatList({ setChatId, setKey, setSender }) {
   const [chats, setChats] = useState([]);
   const [user, setUser] = useState({});
 
@@ -16,7 +16,6 @@ function ChatList({ setChatId }) {
     //   { id: 3, title: "Chat 3", date: "2023-06-08" },
     //   { id: 4, title: "Chat 4", date: "2023-06-07" },
     // ];
-    console.log(localStorage.getItem("token"));
     axios
       .get("http://localhost:3000/api/users/me", {
         headers: {
@@ -37,11 +36,9 @@ function ChatList({ setChatId }) {
               const chat = response.data[i];
               const senderId =
                 chat.user1 === res.data._id ? chat.user2 : chat.user1;
-              console.log(senderId);
               const title = (
                 await axios.get(`http://localhost:3000/api/users/${senderId}`)
               ).data.name;
-              console.log(title);
               const lastMessage = "hello";
               // chat.messages.length > 0
               //   ? chat.messages[chat.messages.length - 1].text
@@ -72,13 +69,21 @@ function ChatList({ setChatId }) {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Chat List
+          Chats
         </Typography>
         <CreateChat />
       </div>
       <List>
         {chats.length > 0 ? (
-          chats.map((chat) => <SingleChat chat={chat} setChatId={setChatId} />)
+          chats.map((chat) => (
+            <SingleChat
+              user={user}
+              setKey={setKey}
+              setSender={setSender}
+              chat={chat}
+              setChatId={setChatId}
+            />
+          ))
         ) : (
           <ListItem>
             <ListItemText primary="No chats found" />

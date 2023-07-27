@@ -49,9 +49,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({ _id: { $ne: req.user._id } });
     if (!users) return res.status(400).send("No users found!");
     return res.send(users);
   } catch (err) {

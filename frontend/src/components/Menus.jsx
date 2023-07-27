@@ -10,8 +10,24 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import axios from "axios";
 
 export default function Menus({ handleLogout }) {
+  const [user, setUser] = React.useState(null);
+  const [name, setName] = React.useState("");
+
+  React.useEffect(() => {
+    getName();
+  }, []);
+
+  const getName = async () => {
+    var temp = await axios.get("http://localhost:3000/api/users/me", {
+      headers: { "x-auth-token": localStorage.getItem("token") },
+    });
+    setUser(temp.data);
+    setName(temp.data.name);
+  };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,7 +48,7 @@ export default function Menus({ handleLogout }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>{name[0]}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -72,18 +88,9 @@ export default function Menus({ handleLogout }) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <Avatar>{name[0]}</Avatar> Profile
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />

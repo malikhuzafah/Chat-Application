@@ -10,9 +10,9 @@ var socket;
 const Chat = ({ chatId, user, sender }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
+  const name = sender.name ? sender.name : "";
 
   const handleSendMessage = () => {
-    console.log(user);
     socket.emit("stop typing", chatId);
 
     if (messageInput.trim() !== "") {
@@ -56,6 +56,7 @@ const Chat = ({ chatId, user, sender }) => {
   }, []);
 
   useEffect(() => {
+    console.log(sender);
     socket.on("message recieved", (msg) => {
       setMessages([...messages, msg]);
     });
@@ -70,7 +71,6 @@ const Chat = ({ chatId, user, sender }) => {
   });
 
   const getMessages = () => {
-    console.log(chatId);
     axios
       .get(`http://localhost:3000/api/messages/${chatId}`, {
         headers: {
@@ -124,21 +124,27 @@ const Chat = ({ chatId, user, sender }) => {
             style={{ marginRight: "8px" }}
           />
         ) : (
-          <Typography
-            style={{
-              // padding: "5",
-              display: "flex",
-              borderRadius: "50%",
-              backgroundColor: "red",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 30,
-              width: 30,
-              marginRight: 10,
-            }}
+          <Avatar
+            // src="/path/to/sender-profile-picture.jpg"
+            style={{ marginRight: "8px" }}
           >
-            {sender.name[0]}
-          </Typography>
+            {name[0]}
+          </Avatar>
+          // <Typography
+          //   style={{
+          //     // padding: "5",
+          //     display: "flex",
+          //     borderRadius: "50%",
+          //     backgroundColor: "red",
+          //     justifyContent: "center",
+          //     alignItems: "center",
+          //     height: 30,
+          //     width: 30,
+          //     marginRight: 10,
+          //   }}
+          // >
+          //   {name[0]}
+          // </Typography>
         )}
         <Typography variant="h6">{sender.name}</Typography>
       </div>
