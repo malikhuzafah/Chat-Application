@@ -61,6 +61,7 @@ export default function Menus({ handleLogout }) {
         PaperProps={{
           elevation: 0,
           sx: {
+            bgcolor: "#6f2232",
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
@@ -78,8 +79,9 @@ export default function Menus({ handleLogout }) {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: "background.paper",
+              // bgcolor: "background.paper",
               transform: "translateY(-50%) rotate(45deg)",
+              bgcolor: "#6f2232",
               zIndex: 0,
             },
           },
@@ -87,19 +89,19 @@ export default function Menus({ handleLogout }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar>{name[0]}</Avatar> Profile
+        <MenuItem style={{ color: "white" }} onClick={handleClose}>
+          <Avatar>{name[0]}</Avatar> {name}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem style={{ color: "white" }} onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize="small" style={{ color: "white" }} />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleLogout}>
+        <MenuItem style={{ color: "white" }} onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" style={{ color: "white" }} />
           </ListItemIcon>
           Logout
         </MenuItem>

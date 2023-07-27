@@ -56,8 +56,9 @@ function ChatList({ setChatId, setKey, setSender }) {
     <div
       style={{
         borderRadius: 25,
-        height: "80vh",
+        height: "100%",
         overflow: "auto",
+        // backgroundColor: "#1a1a1d",
       }}
     >
       <div

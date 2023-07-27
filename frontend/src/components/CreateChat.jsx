@@ -56,8 +56,22 @@ export default function CreateChat() {
     <>
       <IconButton
         aria-label="delete"
-        color="primary"
+        // color="#6f2232"
+        sx={{
+          color: "#efeee5",
+          backgroundColor: "#6f2232",
+          ":hover": {
+            backgroundColor: "#efeee5",
+            color: "#6f2232",
+          },
+        }}
         onClick={handleClickOpen("paper")}
+        style={{
+          // color: "#efeee5",
+          // backgroundColor: "#6f2232",
+          height: "50px",
+          width: "50px",
+        }}
       >
         <AddIcon />
       </IconButton>

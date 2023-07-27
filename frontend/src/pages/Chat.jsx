@@ -114,7 +114,7 @@ const Chat = ({ chatId, user, sender }) => {
           top: 0,
           zIndex: 1,
           padding: 20,
-          backgroundColor: "#f5f5f5",
+          // backgroundColor: "#f5f5f5",
         }}
       >
         {sender.profilePicture ? (
@@ -219,7 +219,9 @@ const Chat = ({ chatId, user, sender }) => {
           display: "flex",
           alignItems: "center",
           padding: 10,
-          backgroundColor: "#f5f5f5",
+          paddingLeft: 50,
+          paddingRight: 50,
+          // backgroundColor: "#f5f5f5",
           position: "sticky",
           bottom: 0,
           zIndex: 1,
@@ -228,6 +230,7 @@ const Chat = ({ chatId, user, sender }) => {
         <input
           type="text"
           value={messageInput}
+          placeholder="Send a chat..."
           onChange={(e) => setMessageInput(e.target.value)}
           style={{
             flex: 1,
@@ -236,9 +239,28 @@ const Chat = ({ chatId, user, sender }) => {
             borderRadius: 25,
             paddingLeft: "20px",
             paddingRight: "20px",
+            fontSize: "20px",
           }}
         />
-        <Button variant="contained" color="primary" onClick={handleSendMessage}>
+        <Button
+          variant="contained"
+          // color="primary"
+          sx={{
+            color: "#efeee5",
+            backgroundColor: "#6f2232",
+            ":hover": {
+              backgroundColor: "#efeee5",
+              color: "#6f2232",
+            },
+          }}
+          onClick={handleSendMessage}
+          size="large"
+          style={{
+            borderRadius: 25,
+            height: "50px",
+            width: "100px",
+          }}
+        >
           Send
         </Button>
       </div>

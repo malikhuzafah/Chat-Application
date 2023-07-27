@@ -40,7 +40,10 @@ const MenuBar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar position="static" style={{ borderRadius: 25 }}>
+    <AppBar
+      position="static"
+      style={{ borderRadius: 25, backgroundColor: "#1a1a1d" }}
+    >
       <Container
         maxWidth="xl"
         // style={{ backgroundColor: "red", borderRadius: 25 }}

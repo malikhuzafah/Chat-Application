@@ -72,7 +72,8 @@ const ChatScreen = () => {
                 //   padding: 2,
                 height: "100%",
                 borderRadius: 25,
-                color: "blue",
+                backgroundColor: "#1a1a1d",
+                color: "#efeee5",
                 overflow: "hidden",
                 boxShadow: "0 5px 10px 5px rgba(0, 0, 0, 0.25)",
               }}
@@ -90,8 +91,9 @@ const ChatScreen = () => {
                 width: "100%",
                 height: "100%",
                 borderRadius: 25,
-                color: "blue",
+                color: "#efeee5",
                 overflow: "auto",
+                backgroundColor: "#1a1a1d",
                 boxShadow: "0 5px 10px 5px rgba(0, 0, 0, 0.25)",
               }}
             >

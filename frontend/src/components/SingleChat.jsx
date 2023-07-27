@@ -106,7 +106,7 @@ export default function SingleChat({
                 sx={{ display: "inline" }}
                 component="span"
                 variant="body2"
-                color="text.primary"
+                color="#efeee5"
               >
                 {chat.lastMessage}
               </Typography>
@@ -127,7 +127,7 @@ export default function SingleChat({
             margin: 0,
             width: "80%",
             height: 1,
-            backgroundColor: "rgba(0,0,0, 0.25)",
+            backgroundColor: "rgba(239, 238, 229, 0.25)",
             border: 0,
           }}
         />
