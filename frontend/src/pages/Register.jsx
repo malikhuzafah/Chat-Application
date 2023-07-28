@@ -20,6 +20,7 @@ const Register = (props) => {
           justifyContent: "center",
           alignItems: "center",
           height: "85vh",
+          backgroundColor: "#1a1a1d",
           boxShadow: "0 5px 10px 5px rgba(0, 0, 0, 0.25)",
         }}
       >
@@ -30,6 +31,26 @@ const Register = (props) => {
               variant="outlined"
               fullWidth
               value={email}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -41,6 +62,26 @@ const Register = (props) => {
               variant="outlined"
               fullWidth
               value={name}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -54,6 +95,26 @@ const Register = (props) => {
               variant="outlined"
               fullWidth
               value={password}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -64,6 +125,14 @@ const Register = (props) => {
               style={{ borderRadius: 25 }}
               variant="contained"
               color="primary"
+              sx={{
+                color: "#efeee5",
+                backgroundColor: "#6f2232",
+                ":hover": {
+                  backgroundColor: "#1a1a1d",
+                  // color: "#6f2232",
+                },
+              }}
               onClick={(e) => {
                 axios
                   .post("http://localhost:3000/api/users/register", {
@@ -84,9 +153,12 @@ const Register = (props) => {
               Register
             </Button>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", color: "#efeee5" }}>
             <Typography>
-              Already have an account? <Link to="/login">Login</Link>
+              Already have an account?{" "}
+              <Link style={{ color: "#efeee5" }} to="/login">
+                Login
+              </Link>
             </Typography>
           </div>
         </div>

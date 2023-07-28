@@ -29,7 +29,24 @@ const Login = () => {
               fullWidth
               value={email}
               sx={{
-                borderColor: "red",
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
               }}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -43,6 +60,26 @@ const Login = () => {
               variant="outlined"
               fullWidth
               value={password}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -52,6 +89,15 @@ const Login = () => {
             <Button
               variant="contained"
               color="primary"
+              sx={{
+                color: "#efeee5",
+                backgroundColor: "#6f2232",
+                ":hover": {
+                  backgroundColor: "#1a1a1d",
+                  // color: "#6f2232",
+                },
+              }}
+              style={{ borderRadius: 25 }}
               onClick={(e) => {
                 axios
                   .post("http://localhost:3000/api/users/login", {
@@ -71,9 +117,12 @@ const Login = () => {
               Login
             </Button>
           </div>
-          <div style={{ padding: 10, textAlign: "center" }}>
+          <div style={{ padding: 10, textAlign: "center", color: "#efeee5" }}>
             <Typography>
-              Dont Have An Account? <Link to="/register">Register</Link>
+              Dont Have An Account?{" "}
+              <Link style={{ color: "#efeee5" }} to="/register">
+                Register
+              </Link>
             </Typography>
           </div>
         </div>
