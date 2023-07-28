@@ -17,6 +17,7 @@ const Login = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "85vh",
+          backgroundColor: "#1a1a1d",
           boxShadow: "0 5px 10px 5px rgba(0, 0, 0, 0.25)",
         }}
       >
@@ -27,6 +28,9 @@ const Login = () => {
               variant="outlined"
               fullWidth
               value={email}
+              sx={{
+                borderColor: "red",
+              }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}

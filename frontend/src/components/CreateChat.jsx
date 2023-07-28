@@ -82,66 +82,71 @@ export default function CreateChat() {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">Start a chat</DialogTitle>
-        <DialogContent dividers={scroll === "paper"}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            To start a chat, tap on the user you want to start a chat with.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Search Users"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <div>
-            {results.map((result) => (
-              <ListItem
-                style={{
-                  borderRadius: 25,
-                  marginBottom: 2,
-                }}
-                key={result._id}
-                button
-                onClick={() => {
-                  axios
-                    .post(
-                      "http://localhost:3000/api/chats",
-                      {
-                        user: result._id.toString(),
-                      },
-                      {
-                        headers: {
-                          "x-auth-token": localStorage.getItem("token"),
+        <div style={{ backgroundColor: "#6f2232", color: "white" }}>
+          <DialogTitle id="scroll-dialog-title">Start a chat</DialogTitle>
+          <DialogContent dividers={scroll === "paper"}>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+            >
+              To start a chat, tap on the user you want to start a chat with.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Search Users"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div>
+              {results.map((result) => (
+                <ListItem
+                  style={{
+                    borderRadius: 25,
+                    marginBottom: 2,
+                  }}
+                  key={result._id}
+                  button
+                  onClick={() => {
+                    axios
+                      .post(
+                        "http://localhost:3000/api/chats",
+                        {
+                          user: result._id.toString(),
                         },
-                      }
-                    )
-                    .then((res) => {
-                      window.location.reload();
-                    })
-                    .catch((err) => console.log(err));
-                }}
-              >
-                <ListItemAvatar>
-                  <Avatar>
-                    <WorkIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={result.name} secondary={result.email} />
-              </ListItem>
-            ))}
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
+                        {
+                          headers: {
+                            "x-auth-token": localStorage.getItem("token"),
+                          },
+                        }
+                      )
+                      .then((res) => {
+                        window.location.reload();
+                      })
+                      .catch((err) => console.log(err));
+                  }}
+                >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <WorkIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={result.name}
+                    secondary={result.email}
+                  />
+                </ListItem>
+              ))}
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </>
   );

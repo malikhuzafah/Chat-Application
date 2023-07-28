@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 import { io } from "socket.io-client";
+import CustomTextField from "../components/CustomTextField";
 
 var socket;
 
@@ -214,7 +215,7 @@ const Chat = ({ chatId, user, sender }) => {
           ))}
         </div>
       </div>
-      <div
+      {/* <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -263,6 +264,9 @@ const Chat = ({ chatId, user, sender }) => {
         >
           Send
         </Button>
+      </div> */}
+      <div style={{ padding: 10, paddingInline: 50 }}>
+        <CustomTextField />
       </div>
     </div>
   );
