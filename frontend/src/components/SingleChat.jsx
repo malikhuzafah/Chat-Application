@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SingleChat({
   chat,
@@ -13,7 +14,10 @@ export default function SingleChat({
   user,
   setSender,
 }) {
+  const [send1, setSend1] = useState(null);
   const [send, setSend] = useState({});
+
+  const navigate = useNavigate();
 
   const senderName = async () => {
     var tempChat = await axios.get(
@@ -35,6 +39,7 @@ export default function SingleChat({
       );
     }
     setSend(sender.data.name);
+    setSend1(sender.data);
   };
 
   useEffect(() => {
@@ -89,9 +94,14 @@ export default function SingleChat({
           // marginBottom: 2,
         }}
         onClick={() => {
-          setKey(Math.random());
-          setChatId(chat.id);
-          getData();
+          if (window.innerWidth > 900) {
+            setKey(Math.random());
+            setChatId(chat.id);
+            getData();
+          } else {
+            console.log(send1);
+            navigate("/chat", { chatId: chat.id, user: user, sender: send1 });
+          }
         }}
       >
         <ListItemAvatar>

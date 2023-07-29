@@ -5,10 +5,16 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 
-export default function CustomTextField() {
+export default function CustomTextField({
+  handleSendMessage,
+  messageInput,
+  setMessageInput,
+}) {
+  const handleChange = (event) => {
+    setMessageInput(event.target.value);
+  };
+
   return (
     <Paper
       component="form"
@@ -28,6 +34,8 @@ export default function CustomTextField() {
         sx={{ ml: 1, flex: 1, backgroundColor: "#FFF" }}
         placeholder="Send a chat..."
         inputProps={{ "aria-label": "Send a chat..." }}
+        value={messageInput}
+        onChange={handleChange}
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       <div style={{ padding: 5 }}>
@@ -42,7 +50,7 @@ export default function CustomTextField() {
               color: "#6f2232",
             },
           }}
-          // onClick={handleSendMessage}
+          onClick={handleSendMessage}
           size="large"
           style={{
             borderRadius: 25,

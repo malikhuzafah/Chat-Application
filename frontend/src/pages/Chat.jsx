@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
@@ -57,7 +57,6 @@ const Chat = ({ chatId, user, sender }) => {
   }, []);
 
   useEffect(() => {
-    console.log(sender);
     socket.on("message recieved", (msg) => {
       setMessages([...messages, msg]);
     });
@@ -266,7 +265,11 @@ const Chat = ({ chatId, user, sender }) => {
         </Button>
       </div> */}
       <div style={{ padding: 10, paddingInline: 50 }}>
-        <CustomTextField />
+        <CustomTextField
+          handleSendMessage={handleSendMessage}
+          messageInput={messageInput}
+          setMessageInput={setMessageInput}
+        />
       </div>
     </div>
   );

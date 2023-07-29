@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middlewares/auth");
+const Chat = require("../../models/chat");
 
 // register user
 router.post("/register", async (req, res) => {
@@ -51,10 +52,26 @@ router.post("/login", async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
   try {
-    const users = await User.find({ _id: { $ne: req.user._id } });
+    var users = await User.find({ _id: { $ne: req.user._id } });
     if (!users) return res.status(400).send("No users found!");
+    for (var i = 0; i < users.length; i++) {
+      console.log(i);
+      var chat = await Chat.findOne({
+        $or: [
+          { user1: users[i]._id, user2: req.user._id },
+          { user1: req.user._id, user2: users[i]._id },
+        ],
+      });
+      console.log(i + chat);
+      if (chat) {
+        users.splice(i, 1);
+        i--;
+      }
+    }
+    console.log(users);
     return res.send(users);
   } catch (err) {
+    console.log(err);
     return res.status(500).send("Somthing went Wrong!");
   }
 });
