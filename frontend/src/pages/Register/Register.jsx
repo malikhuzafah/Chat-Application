@@ -1,36 +1,57 @@
-import { TextField, Button, Typography } from "@mui/material";
 import React from "react";
+import "./register.css";
+import { TextField, Button, Typography } from "@mui/material";
+// import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import Auth from "../components/Auth";
+import Auth from "../../components/Auth";
 import axios from "axios";
 
-const Login = () => {
+const Register = (props) => {
   const [email, setEmail] = React.useState("");
+  const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
+
   return (
     <Auth>
-      <div
-        style={{
-          display: "flex",
-          marginTop: 10,
-          borderRadius: 25,
-          justifyContent: "center",
-          alignItems: "center",
-          height: "85vh",
-          backgroundColor: "#1a1a1d",
-          boxShadow: "0 5px 10px 5px rgba(0, 0, 0, 0.25)",
-        }}
-      >
-        <div style={{ width: "60%" }}>
-          <div style={{ padding: 10, textAlign: "center" }}>
-            <Typography
-              variant="h3"
-              style={{ color: "#efeee5", fontWeight: "bold" }}
-            >
-              Login
+      <div className="main">
+        <div className="main-content">
+          <div className="pad10 text-center">
+            <Typography variant="h3" className="main-heading text">
+              Register
             </Typography>
           </div>
-          <div style={{ padding: 10 }}>
+          <div className="pad10">
+            <TextField
+              label="Name"
+              variant="outlined"
+              fullWidth
+              value={name}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          </div>
+          <div className="pad10">
             <TextField
               autoFocus
               label="Email"
@@ -62,7 +83,7 @@ const Login = () => {
               }}
             />
           </div>
-          <div style={{ padding: 10 }}>
+          <div className="pad10">
             <TextField
               label="Password"
               type="password"
@@ -94,8 +115,9 @@ const Login = () => {
               }}
             />
           </div>
-          <div style={{ padding: 10, textAlign: "center" }}>
+          <div className="pad10 text-center">
             <Button
+              style={{ borderRadius: 25 }}
               variant="contained"
               color="primary"
               sx={{
@@ -106,11 +128,11 @@ const Login = () => {
                   // color: "#6f2232",
                 },
               }}
-              style={{ borderRadius: 25 }}
               onClick={(e) => {
                 axios
-                  .post("http://localhost:3000/api/users/login", {
+                  .post("http://localhost:3000/api/users/register", {
                     email,
+                    name,
                     password,
                   })
                   .then((res) => {
@@ -123,14 +145,14 @@ const Login = () => {
                   });
               }}
             >
-              Login
+              Register
             </Button>
           </div>
-          <div style={{ padding: 10, textAlign: "center", color: "#efeee5" }}>
+          <div className="text-center text">
             <Typography>
-              Dont Have An Account?{" "}
-              <Link style={{ color: "#efeee5" }} to="/register">
-                Register
+              Already have an account?{" "}
+              <Link className="text" to="/login">
+                Login
               </Link>
             </Typography>
           </div>
@@ -140,4 +162,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -1,20 +1,14 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
+import "./menuBar.css";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useNavigate, Link } from "react-router-dom";
-import Menus from "./Menus";
-
-// const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import Menus from "../Menus/Menus";
 
 const MenuBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,12 +36,10 @@ const MenuBar = () => {
   return (
     <AppBar
       position="static"
-      style={{ borderRadius: 25, backgroundColor: "#1a1a1d" }}
+      className="app-bar"
+      style={{ backgroundColor: "#1a1a1d" }}
     >
-      <Container
-        maxWidth="xl"
-        // style={{ backgroundColor: "red", borderRadius: 25 }}
-      >
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <QuestionAnswerIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
@@ -72,41 +64,9 @@ const MenuBar = () => {
             ChatApp
           </Typography>
 
-          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Doctor's Appointment</Typography>
-              </MenuItem>
-            </Menu>
-          </Box> */}
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <QuestionAnswerIcon
+            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -127,21 +87,14 @@ const MenuBar = () => {
           >
             Chat App
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {/* <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Doctor'sAppointment
-            </Button> */}
-          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn() ? (
               <Menus handleLogout={logout} />
             ) : (
               isLoggedIn() && (
-                <Link to="/login" style={{ textDecoration: "none" }}>
+                <Link to="/login" className="link">
                   <Button
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: "white", display: "block" }}

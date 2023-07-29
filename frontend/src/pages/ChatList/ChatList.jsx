@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Typography, List, ListItem, ListItemText } from "@mui/material";
 import axios from "axios";
-import CreateChat from "../components/CreateChat";
-import SingleChat from "../components/SingleChat";
+import CreateChat from "../../components/CreateChat/CreateChat";
+import SingleChat from "../../components/SingleChat/SingleChat";
 
 function ChatList({ setChatId, setKey, setSender }) {
   const [chats, setChats] = useState([]);
@@ -59,6 +59,7 @@ function ChatList({ setChatId, setKey, setSender }) {
         height: "100%",
         overflow: "auto",
         backgroundColor: "#1a1a1d",
+        // backgroundColor: "#6f22315c",
         marginTop: window.innerWidth > 900 ? 0 : 10,
         color: "white",
       }}

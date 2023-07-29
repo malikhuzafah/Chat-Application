@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import ChatList from "./ChatList";
-import Chat from "./Chat";
+import ChatList from "../ChatList/ChatList";
+import Chat from "../Chat/Chat";
 import axios from "axios";
-import Auth from "../components/Auth";
-import Logout from "../components/Logout";
+import Logout from "../../components/Logout";
 
 const ChatScreen = () => {
   const [chatId, setChatId] = useState("");
@@ -20,29 +19,6 @@ const ChatScreen = () => {
       })
       .then((res) => {
         setUser(res.data);
-        // axios
-        //   .get(`http://localhost:3000/api/chats/${chatId}`, {
-        //     headers: {
-        //       "x-auth-token": localStorage.getItem("token"),
-        //     },
-        //   })
-        //   .then((res) => {
-        //     if (res.data.length > 0) {
-        //       if (res.data[0].user1 === user._id) {
-        //         axios
-        //           .get(`http://localhost:3000/api/users/${res.data[0].user2}`)
-        //           .then((res) => {
-        //             setSender(res.data);
-        //           });
-        //       } else {
-        //         axios
-        //           .get(`http://localhost:3000/api/users/${res.data[0].user1}`)
-        //           .then((res) => {
-        //             setSender(res.data);
-        //           });
-        //       }
-        //     }
-        //   });
       })
       .catch((err) => console.log(err));
   }, []);

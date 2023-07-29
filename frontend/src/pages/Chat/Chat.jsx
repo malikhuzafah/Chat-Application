@@ -1,18 +1,26 @@
 import "./Chat.css";
-import React, { useEffect, useRef, useState } from "react";
-import Button from "@mui/material/Button";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 import { io } from "socket.io-client";
-import CustomTextField from "../components/CustomTextField";
+import CustomTextField from "../../components/CustomTextField/CustomTextField";
 
 var socket;
 
 const Chat = ({ chatId, user, sender }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const name = sender.name ? sender.name : "";
+
+  const handleTyping = () => {
+    socket.emit("typing", chatId);
+  };
+
+  const handleStopTyping = () => {
+    socket.emit("stop typing", chatId);
+  };
 
   const handleSendMessage = () => {
     socket.emit("stop typing", chatId);
@@ -62,13 +70,13 @@ const Chat = ({ chatId, user, sender }) => {
       setMessages([...messages, msg]);
     });
 
-    // socket.on("typing", () => {
-    //   setIsTyping(true);
-    // });
+    socket.on("typing", () => {
+      setIsTyping(true);
+    });
 
-    // socket.on("stop typing", () => {
-    //   setIsTyping(false);
-    // });
+    socket.on("stop typing", () => {
+      setIsTyping(false);
+    });
   });
 
   const getMessages = () => {
@@ -97,51 +105,24 @@ const Chat = ({ chatId, user, sender }) => {
     socket.emit("join chat", chatId);
   };
 
-  // const typingAnimation = (
-  //   <React.Fragment>
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         height: 30,
-  //         width: 30,
-  //         marginRight: 10,
-  //         flexDirection: "column",
-  //       }}
-  //     >
-  //       <span className="typing-dot"></span>
-  //       <span className="typing-dot"></span>
-  //       <span className="typing-dot"></span>
-  //     </div>
-  //   </React.Fragment>
-  // );
-
-  // const typingIndicator = (
-  //   <div id="typing-indicator">
-  //     {typingText} {typingText ? typingAnimation : ""}
-  //   </div>
-  // );
-
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         height: "80vh",
-        // padding: 10,
       }}
     >
       <div
         style={{
-          // marginBottom: "16px",
           display: "flex",
           alignItems: "center",
           position: "sticky",
           top: 0,
           zIndex: 1,
           padding: 20,
-          // backgroundColor: "#f5f5f5",
+          backgroundColor: "#6f22315c",
+          borderRadius: 25,
         }}
       >
         {sender.profilePicture ? (
@@ -157,21 +138,6 @@ const Chat = ({ chatId, user, sender }) => {
           >
             {name[0]}
           </Avatar>
-          // <Typography
-          //   style={{
-          //     // padding: "5",
-          //     display: "flex",
-          //     borderRadius: "50%",
-          //     backgroundColor: "red",
-          //     justifyContent: "center",
-          //     alignItems: "center",
-          //     height: 30,
-          //     width: 30,
-          //     marginRight: 10,
-          //   }}
-          // >
-          //   {name[0]}
-          // </Typography>
         )}
         <Typography variant="h6">{sender.name}</Typography>
       </div>
@@ -243,62 +209,21 @@ const Chat = ({ chatId, user, sender }) => {
             </div>
           ))}
         </div>
+        {isTyping && (
+          <div className="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        )}
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          padding: 10,
-          paddingLeft: 50,
-          paddingRight: 50,
-          // backgroundColor: "#f5f5f5",
-          position: "sticky",
-          bottom: 0,
-          zIndex: 1,
-        }}
-      >
-        <input
-          type="text"
-          value={messageInput}
-          placeholder="Send a chat..."
-          onChange={(e) => setMessageInput(e.target.value)}
-          style={{
-            flex: 1,
-            marginRight: 20,
-            height: 50,
-            borderRadius: 25,
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            fontSize: "20px",
-          }}
-        />
-        <Button
-          variant="contained"
-          // color="primary"
-          sx={{
-            color: "#efeee5",
-            backgroundColor: "#6f2232",
-            ":hover": {
-              backgroundColor: "#efeee5",
-              color: "#6f2232",
-            },
-          }}
-          onClick={handleSendMessage}
-          size="large"
-          style={{
-            borderRadius: 25,
-            height: "50px",
-            width: "100px",
-          }}
-        >
-          Send
-        </Button>
-      </div> */}
       <div style={{ padding: 10, paddingInline: 50 }}>
         <CustomTextField
           handleSendMessage={handleSendMessage}
           messageInput={messageInput}
           setMessageInput={setMessageInput}
+          handleTyping={handleTyping}
+          handleStopTyping={handleStopTyping}
         />
       </div>
     </div>

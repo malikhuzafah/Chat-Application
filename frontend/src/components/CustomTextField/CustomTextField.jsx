@@ -1,19 +1,30 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import "./CustomTextField.css";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+// import IconButton from "@mui/material/IconButton";
+// import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
 
 export default function CustomTextField({
   handleSendMessage,
   messageInput,
   setMessageInput,
+  handleTyping,
+  handleStopTyping,
 }) {
   const handleChange = (event) => {
+    handleTyping();
     setMessageInput(event.target.value);
   };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      handleStopTyping();
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [messageInput]);
 
   return (
     <Paper
@@ -30,7 +41,7 @@ export default function CustomTextField({
         <MenuIcon />
       </IconButton> */}
       <InputBase
-        style={{ paddingLeft: 20 }}
+        className="input"
         sx={{ ml: 1, flex: 1, backgroundColor: "#FFF" }}
         placeholder="Send a chat..."
         inputProps={{ "aria-label": "Send a chat..." }}
@@ -39,7 +50,7 @@ export default function CustomTextField({
         autoFocus
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <div style={{ padding: 5 }}>
+      <div className="sendContainer">
         <Button
           variant="contained"
           color="primary"
@@ -53,9 +64,7 @@ export default function CustomTextField({
           }}
           onClick={handleSendMessage}
           size="large"
-          style={{
-            borderRadius: 25,
-          }}
+          className="sendBtn"
         >
           Send
         </Button>
