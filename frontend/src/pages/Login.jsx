@@ -22,8 +22,17 @@ const Login = () => {
         }}
       >
         <div style={{ width: "60%" }}>
+          <div style={{ padding: 10, textAlign: "center" }}>
+            <Typography
+              variant="h3"
+              style={{ color: "#efeee5", fontWeight: "bold" }}
+            >
+              Login
+            </Typography>
+          </div>
           <div style={{ padding: 10 }}>
             <TextField
+              autoFocus
               label="Email"
               variant="outlined"
               fullWidth

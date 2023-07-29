@@ -106,7 +106,7 @@ export default function SingleChat({
       >
         <ListItemAvatar>
           {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" /> */}
-          <Avatar>{send[0]}</Avatar>
+          <Avatar style={{ backgroundColor: "#6f2232" }}>{send[0]}</Avatar>
         </ListItemAvatar>
         <ListItemText
           primary={chat.title}

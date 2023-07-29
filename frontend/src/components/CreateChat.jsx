@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AddIcon from "@mui/icons-material/Add";
+import ChatIcon from "@mui/icons-material/Chat";
 import {
   Dialog,
   DialogTitle,
@@ -15,7 +15,6 @@ import {
   ListItemAvatar,
   Avatar,
 } from "@mui/material";
-import WorkIcon from "@mui/icons-material/Work";
 
 export default function CreateChat() {
   const [scroll, setScroll] = React.useState("paper");
@@ -73,7 +72,8 @@ export default function CreateChat() {
           width: "50px",
         }}
       >
-        <AddIcon />
+        <ChatIcon />
+        {/* <AddIcon /> */}
       </IconButton>
       <Dialog
         open={open}
@@ -89,10 +89,31 @@ export default function CreateChat() {
               id="scroll-dialog-description"
               ref={descriptionElementRef}
               tabIndex={-1}
+              style={{ color: "#999" }}
             >
               To start a chat, tap on the user you want to start a chat with.
             </DialogContentText>
             <TextField
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
               autoFocus
               margin="dense"
               id="name"
@@ -131,8 +152,8 @@ export default function CreateChat() {
                   }}
                 >
                   <ListItemAvatar>
-                    <Avatar>
-                      <WorkIcon />
+                    <Avatar style={{ backgroundColor: "#999" }}>
+                      {result.name[0]}
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -144,7 +165,21 @@ export default function CreateChat() {
             </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Close</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                color: "#efeee5",
+                backgroundColor: "#1a1a1d",
+                ":hover": {
+                  backgroundColor: "#efeee5",
+                  color: "#1a1a1d",
+                },
+              }}
+              onClick={handleClose}
+            >
+              Close
+            </Button>
           </DialogActions>
         </div>
       </Dialog>

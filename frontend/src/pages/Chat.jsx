@@ -1,3 +1,4 @@
+import "./Chat.css";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -96,6 +97,32 @@ const Chat = ({ chatId, user, sender }) => {
     socket.emit("join chat", chatId);
   };
 
+  // const typingAnimation = (
+  //   <React.Fragment>
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //         height: 30,
+  //         width: 30,
+  //         marginRight: 10,
+  //         flexDirection: "column",
+  //       }}
+  //     >
+  //       <span className="typing-dot"></span>
+  //       <span className="typing-dot"></span>
+  //       <span className="typing-dot"></span>
+  //     </div>
+  //   </React.Fragment>
+  // );
+
+  // const typingIndicator = (
+  //   <div id="typing-indicator">
+  //     {typingText} {typingText ? typingAnimation : ""}
+  //   </div>
+  // );
+
   return (
     <div
       style={{
@@ -126,7 +153,7 @@ const Chat = ({ chatId, user, sender }) => {
         ) : (
           <Avatar
             // src="/path/to/sender-profile-picture.jpg"
-            style={{ marginRight: "8px" }}
+            style={{ marginRight: "8px", backgroundColor: "#6f2232" }}
           >
             {name[0]}
           </Avatar>
@@ -191,9 +218,12 @@ const Chat = ({ chatId, user, sender }) => {
                 style={{
                   borderRadius: 25,
                   padding: "10px 20px 5px 20px",
+                  // backgroundColor:
+                  //   message.sender === user._id ? "#dcf8c6" : "#f0f0f0",
                   backgroundColor:
-                    message.sender === user._id ? "#dcf8c6" : "#f0f0f0",
-                  color: "#333",
+                    message.sender === user._id ? "#6f2232" : "#efeee5",
+                  // color: "#333",
+                  color: message.sender === user._id ? "#efeee5" : "#1a1a1a",
                   maxWidth: "70%",
                 }}
               >

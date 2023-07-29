@@ -48,7 +48,12 @@ export default function Menus({ handleLogout }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>{name[0]}</Avatar>
+            <Avatar
+              style={{ backgroundColor: "#6f2232" }}
+              sx={{ width: 40, height: 40 }}
+            >
+              {name[0]}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>

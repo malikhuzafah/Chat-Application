@@ -25,36 +25,13 @@ const Register = (props) => {
         }}
       >
         <div style={{ width: "60%" }}>
-          <div style={{ padding: 10 }}>
-            <TextField
-              label="Email"
-              variant="outlined"
-              fullWidth
-              value={email}
-              sx={{
-                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-                  borderColor: "#efeee5",
-                },
-                "& .MuiInputLabel-root": {
-                  color: "#efeee5",
-                },
-                "&:not(.Mui-focused) fieldset": {
-                  borderColor: "#efeee5",
-                },
-                "&:not(.Mui-focused):hover fieldset": {
-                  borderColor: "#efeee5",
-                },
-                input: {
-                  color: "white",
-                },
-                // "input + .MuiOutlinedInput-notchedOutline": {
-                //   backgroundColor: "#6f2232",
-                // },
-              }}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
+          <div style={{ padding: 10, textAlign: "center" }}>
+            <Typography
+              variant="h3"
+              style={{ color: "#efeee5", fontWeight: "bold" }}
+            >
+              Register
+            </Typography>
           </div>
           <div style={{ padding: 10 }}>
             <TextField
@@ -84,6 +61,38 @@ const Register = (props) => {
               }}
               onChange={(e) => {
                 setName(e.target.value);
+              }}
+            />
+          </div>
+          <div style={{ padding: 10 }}>
+            <TextField
+              autoFocus
+              label="Email"
+              variant="outlined"
+              fullWidth
+              value={email}
+              sx={{
+                "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#efeee5",
+                },
+                "&:not(.Mui-focused) fieldset": {
+                  borderColor: "#efeee5",
+                },
+                "&:not(.Mui-focused):hover fieldset": {
+                  borderColor: "#efeee5",
+                },
+                input: {
+                  color: "white",
+                },
+                // "input + .MuiOutlinedInput-notchedOutline": {
+                //   backgroundColor: "#6f2232",
+                // },
+              }}
+              onChange={(e) => {
+                setEmail(e.target.value);
               }}
             />
           </div>

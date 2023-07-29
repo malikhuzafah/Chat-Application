@@ -36,6 +36,7 @@ export default function CustomTextField({
         inputProps={{ "aria-label": "Send a chat..." }}
         value={messageInput}
         onChange={handleChange}
+        autoFocus
       />
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       <div style={{ padding: 5 }}>

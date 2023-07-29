@@ -10,9 +10,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useNavigate, Link } from "react-router-dom";
 import Menus from "./Menus";
-import axios from "axios";
 
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -49,7 +49,9 @@ const MenuBar = () => {
         // style={{ backgroundColor: "red", borderRadius: 25 }}
       >
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <QuestionAnswerIcon
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -67,10 +69,10 @@ const MenuBar = () => {
               navigate("/");
             }}
           >
-            Chat App
+            ChatApp
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -103,7 +105,7 @@ const MenuBar = () => {
                 <Typography textAlign="center">Doctor's Appointment</Typography>
               </MenuItem>
             </Menu>
-          </Box>
+          </Box> */}
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -126,19 +128,19 @@ const MenuBar = () => {
             Chat App
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
+            {/* <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Doctor'sAppointment
-            </Button>
+            </Button> */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {isLoggedIn() ? (
               <Menus handleLogout={logout} />
             ) : (
-              <>
+              isLoggedIn() && (
                 <Link to="/login" style={{ textDecoration: "none" }}>
                   <Button
                     onClick={handleCloseNavMenu}
@@ -147,7 +149,7 @@ const MenuBar = () => {
                     Login / Register
                   </Button>
                 </Link>
-              </>
+              )
             )}
           </Box>
         </Toolbar>
