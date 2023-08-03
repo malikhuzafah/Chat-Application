@@ -1,11 +1,11 @@
 .input {
-  padding-left: 20;
+  padding-left: 20px;
 }
 
 .sendContainer {
-  padding: 5;
+  padding: 5px;
 }
 
 .sendBtn {
-  border-radius: 25;
+  border-radius: 25px;
 }

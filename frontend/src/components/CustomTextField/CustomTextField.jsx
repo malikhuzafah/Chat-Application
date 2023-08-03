@@ -65,6 +65,7 @@ export default function CustomTextField({
           onClick={handleSendMessage}
           size="large"
           className="sendBtn"
+          style={{ borderRadius: 25 }}
         >
           Send
         </Button>
